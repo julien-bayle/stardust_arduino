@@ -39,8 +39,10 @@ sudo /etc/init.d/dphys-swapfile restart
 ```bash
 cd /home/pi
 git clone https://github.com/julienbayle/stardust_arduino
+mkdir stardust_arduino/motorboard/lib
 cd stardust_arduino/motorboard/lib
 rosrun rosserial_arduino make_libraries.py .
+mkdir ../sensorboard/lib
 cd ../sensorboard/lib
 rosrun rosserial_arduino make_libraries.py .
 ```
