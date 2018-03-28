@@ -1,0 +1,4 @@
+motorboard/lib/*
+sensorboard/lib/*
+motorboard/.build
+sensorboard/.build
