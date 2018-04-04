@@ -54,7 +54,7 @@ ino upload
 rm .build -Rf
 ```
 
-7. Test
+5. Test
 
 ```bash
 roscore &
