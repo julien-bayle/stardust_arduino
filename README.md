@@ -9,45 +9,26 @@ Code has been written to communicate with a raspberry 3 board running ROS and a 
 
 On the raspberry pi :
 
-1. Update SWAP to 1Go as ROS SERIAL compilation need 1,4 Go of RAM
+1. Install ROSSERIAL
 
 ```bash
-sudo vi /etc/dphys-swapfile 
-sudo /etc/init.d/dphys-swapfile restart
+sudo apt-get install ros-kinetic-rosserial
 ```
 
-2. Compile ROS SERIAL
-
-```bash
-cd /home/pi/catkin_ws
-source devel/setup.bash
-cd src
-git clone https://github.com/ros-drivers/rosserial.git
-cd /..
-catkin_make
-catkin_make install
-```
-
-3. Update SWAP back to its previous value
-```bash
-sudo vi /etc/dphys-swapfile 
-sudo /etc/init.d/dphys-swapfile restart
-```
-
-4. Configure arduino workspace
+2. Configure arduino workspace
 
 ```bash
 cd /home/pi
-git clone https://github.com/julienbayle/stardust_arduino
-mkdir stardust_arduino/motorboard/lib
-cd stardust_arduino/motorboard/lib
+git clone https://github.com/julienbayle/starbaby_arduino
+cd starbaby_arduino/motorboard
+mkdir lib
+cd lib
 rosrun rosserial_arduino make_libraries.py .
-mkdir ../sensorboard/lib
-cd ../sensorboard/lib
-rosrun rosserial_arduino make_libraries.py .
+cd ../sensorboard
+ln -s /home/pi/starbaby_arduino/motorboard/lib lib
 ```
 
-5. Install ino tool (Command line toolkit for Arduino)
+3. Install ino tool (Command line toolkit for Arduino)
 
 ```bash
 sudo apt-get update 
@@ -57,17 +38,17 @@ cd ino
 sudo python setup.py install (or make make install)
 ```
 
-6. Compile and send code to the arduino boards using ino
+4. Compile and send code to the arduino boards using ino
 
 ```bash
-cd /home/pi/stardust_arduino/motorboard
+cd /home/pi/starbaby_arduino/motorboard
 ino build
 ino upload
 rm .build -Rf
 ```
 
 ```bash
-cd /home/pi/stardust_arduino/sensorboard
+cd /home/pi/starbaby_arduino/sensorboard
 ino build
 ino upload
 rm .build -Rf
