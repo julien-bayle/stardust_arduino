@@ -1,7 +1,7 @@
 /* Pin definition (0 & 1 are used by TX/RX) */
 
-const byte LEFT_WHEEL_ENCODER = 2;      // HALL SENSOR ENCODER
-const byte RIGHT_WHEEL_ENCODER = 3;     // HALL SENSOR ENCODER
+const byte RIGHT_WHEEL_ENCODER = 2;     // HALL SENSOR ENCODER
+const byte LEFT_WHEEL_ENCODER = 3;      // HALL SENSOR ENCODER
 const byte LAUNCHER_ENCODER = 4;        // HALL SENSOR ENCODER
 
 const byte LAUNCHER_PWM = 5;            // MOTOR (timer 0 / output 5 & 6)
