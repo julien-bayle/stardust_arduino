@@ -1,0 +1,14 @@
+/* Pin definition (0 & 1 are used by TX/RX) */
+
+const byte ULTRASOUND_ECHO_LEFT = 11;	// HC-SR04 SENSOR
+const byte ULTRASOUND_TRIG_LEFT = 12;	// HC-SR04 SENSOR
+const byte ULTRASOUND_ECHO_RIGHT = 7;	// HC-SR04 SENSOR
+const byte ULTRASOUND_TRIG_RIGHT = 8;	// HC-SR04 SENSOR
+const byte ULTRASOUND_ECHO_CENTER = 9;	// HC-SR04 SENSOR
+const byte ULTRASOUND_TRIG_CENTER = 10;	// HC-SR04 SENSOR
+
+const byte SERVOMOTOR_FRONT = 2;        // SERVOMOTOR
+const byte SERVOMOTOR_LAUNCHER = 3;     // SERVOMOTOR
+
+const byte SHARP_SIDE = 5;      		// SHARP IR SENSOR / ADC
+const byte SHARP_LAUNCHER = 4;     		// SHARP IR SENSOR / ADC
