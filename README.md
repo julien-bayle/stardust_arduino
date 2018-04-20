@@ -9,28 +9,49 @@ Code has been written to communicate with a raspberry 3 board running ROS and a 
 
 On the raspberry pi :
 
-1. Install ROSSERIAL
+1. Update SWAP to 1Go as ROS SERIAL compilation need 1,4 Go of RAM
 
 ```bash
-sudo apt-get install ros-kinetic-rosserial
+sudo vi /etc/dphys-swapfile 
+sudo /etc/init.d/dphys-swapfile restart
 ```
 
-2. Configure arduino workspace
+2. Compile ROS SERIAL
 
 ```bash
-cd /home/pi
+cd ~/catkin_ws
+source devel/setup.bash
+cd src
+git clone https://github.com/ros-drivers/rosserial.git
+cd ..
+catkin_make
+catkin_make install
+source devel/setup.bash
+```
+
+3. Update SWAP back to its previous value
+```bash
+sudo vi /etc/dphys-swapfile 
+sudo /etc/init.d/dphys-swapfile restart
+```
+
+4. Configure arduino workspace
+
+```bash
+cd ~
 git clone https://github.com/julienbayle/starbaby_arduino
-cd starbaby_arduino/motorboard
-mkdir lib
-cd lib
+mkdir starbaby_arduino/motorboard/lib
+cd starbaby_arduino/motorboard/lib
 rosrun rosserial_arduino make_libraries.py .
-cd ../sensorboard
-ln -s /home/pi/starbaby_arduino/motorboard/lib lib
+mkdir ../../sensorboard/lib
+cd ../../sensorboard/lib
+rosrun rosserial_arduino make_libraries.py .
 ```
 
-3. Install ino tool (Command line toolkit for Arduino)
+5. Install ino tool (Command line toolkit for Arduino)
 
 ```bash
+cd ~
 sudo apt-get update 
 sudo apt-get install vim arduino python-dev python-setuptools
 git clone git://github.com/amperka/ino.git
@@ -38,23 +59,23 @@ cd ino
 sudo python setup.py install (or make make install)
 ```
 
-4. Compile and send code to the arduino boards using ino
+6. Compile and send code to the arduino boards using ino
 
 ```bash
-cd /home/pi/starbaby_arduino/motorboard
+cd ~/starbaby_arduino/motorboard
 ino build
 ino upload
 rm .build -Rf
 ```
 
 ```bash
-cd /home/pi/starbaby_arduino/sensorboard
-ino build
-ino upload
+cd ~/starbaby_arduino/sensorboard
+ino build -m nano328
+ino upload -m nano328
 rm .build -Rf
 ```
 
-5. Test
+7. Test
 
 ```bash
 roscore &
