@@ -54,11 +54,11 @@ namespace stardust
   	
         pinMode(encoder_pin, INPUT);
         if(encoder_pin == 2) {	
-          attachInterrupt(0, ISR_0, CHANGE);
+          attachInterrupt(0, ISR_0, RISING);
         }
 
         if(encoder_pin == 3) {
-          attachInterrupt(1, ISR_1, CHANGE);
+          attachInterrupt(1, ISR_1, RISING);
         }
 
         if(dir_pin >= 0) {
