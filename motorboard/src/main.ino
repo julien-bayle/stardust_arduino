@@ -28,12 +28,12 @@
 
 /* Global variables */
 
-// Motor messages are sent at 50Hz.
+// Motor messages are sent at 30Hz.
 const int MOTOR_LOOP_RATE = 30;
 const int MOTOR_INTERVAL = 1000 / MOTOR_LOOP_RATE; 
 unsigned long nextMotorLoop = MOTOR_INTERVAL;
 
-//Voltage and current messages are sent at 10Hz.
+//Voltage and current messages are sent at 5Hz.
 const int ADC_LOOP_RATE = 5;
 const int ADC_INTERVAL = 1000 / ADC_LOOP_RATE; 
 unsigned long nextADCLoop = ADC_INTERVAL;
