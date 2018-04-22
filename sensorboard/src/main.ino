@@ -22,8 +22,8 @@
 
 /* Global variables */
 
-// Range messages are sent at 30Hz.
-const int RANGE_LOOP_RATE = 30;
+// Range messages are sent at 20Hz.
+const int RANGE_LOOP_RATE = 20;
 const int RANGE_INTERVAL = 1000 / RANGE_LOOP_RATE; 
 unsigned long nextRangeLoop = RANGE_INTERVAL;
 
@@ -32,11 +32,13 @@ unsigned int sensorIterator = 0;
 
 stardust::Servomotor frontServo(
     "/servo/front",
-    SERVOMOTOR_FRONT);
+    SERVOMOTOR_FRONT,
+    159);
 
 stardust::Servomotor launcherServo(
     "/servo/launcher",
-    SERVOMOTOR_LAUNCHER);
+    SERVOMOTOR_LAUNCHER,
+    170);
 
 stardust::SHARP_GP2Y0A51SK0F sideRange(
     "/range/side",

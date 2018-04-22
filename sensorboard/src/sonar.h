@@ -34,7 +34,7 @@ namespace stardust
             range_msg.header.frame_id =  _topic_name;
             range_msg.field_of_view = 0.5; // rad (30° degrees)
             range_msg.min_range = 0.08;    // meter (8 cm)
-            range_msg.max_range = 1.00;    // meter
+            range_msg.max_range = 0.60;    // meter
       }
     
       void setup(ros::NodeHandle *nh)
@@ -57,7 +57,7 @@ namespace stardust
 
         /* Convert time to a distance */
         if (measure > 0)
-          return measure / SOUND_SPEED_2;
+          return measure * SOUND_SPEED_2;
         else
           return 10.0; // 10 meters (ROS will ignore it as it is greater than max range)
       }
