@@ -63,16 +63,16 @@ sudo python setup.py install (or make make install)
 
 ```bash
 cd ~/starbaby_arduino/motorboard
+ino clean
 ino build
 ino upload
-rm .build -Rf
 ```
 
 ```bash
 cd ~/starbaby_arduino/sensorboard
 ino build -m nano328
-ino upload -m nano328
-rm .build -Rf
+ino upload -m nano328 -p /dev/ttyUSB0
+ino clean
 ```
 
 7. Test
@@ -80,6 +80,7 @@ rm .build -Rf
 ```bash
 roscore &
 rosrun rosserial_python serial_node.py /dev/ttyACM0 &
+rosrun rosserial_python serial_node.py /dev/ttyUSB0 &
 rostopic list
 ```
 
