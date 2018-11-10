@@ -1,5 +1,8 @@
 # Stardust arduino
 
+> **This repository has been archived in october 2018.**\
+> **New version of the project (Eurobot 2019) is here : https://github.com/julienbayle/stardust**
+
 Arduino code - Stardust team - Eurobot 2018
 
 This repository contains the code of the arduino boards.
