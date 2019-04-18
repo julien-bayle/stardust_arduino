@@ -3,6 +3,7 @@
 #include "sharp_ir.h"
 #include "servo.h"
 #include "sonar.h"
+#include "ils.h"
 
 /*
   StarBaby 
@@ -12,12 +13,14 @@
    - Two servomotors
    - Two SHARP distance measurements
    - Three sonar sensors (HC-SR04)
+   - ILS for robot starting
 
   ROS topics :
     /servo/front (ROS -> Arduino) : Int8 value from 0 to 255
-    /servo/launcher (ROS -> Arduino) : Int8 value from 0 to 255
+    /servo/ball (ROS -> Arduino) : Int8 value from 0 to 255
     /sharp/name (Arduino -> ROS) : sensor_msgs/Range
     /sonar/name (Arduino -> ROS) : sensor_msgs/Range
+    /ils (Arduino -> ROS) : Boolean
 */
 
 /* Global variables */
@@ -33,7 +36,7 @@ unsigned int sensorIterator = 0;
 stardust::Servomotor frontServo(
     "/servo/front",
     SERVOMOTOR_FRONT,
-    159);
+    169);
 
 stardust::Servomotor launcherServo(
     "/servo/launcher",
@@ -44,9 +47,14 @@ stardust::SHARP_GP2Y0A51SK0F sideRange(
     "/range/side",
     SHARP_SIDE);
 
-stardust::SHARP_GP2Y0A51SK0F launcherRange(
-    "/range/launcher",
+/**stardust::SHARP_GP2Y0A51SK0F launcherRange(
+    "/range/ball",
     SHARP_LAUNCHER);
+**/
+
+stardust::ILS ilsStart(
+    "/ils",
+    ILS_START);
 
 stardust::SonarHcSr04 leftSonar(
     "/sonar/left",
@@ -72,7 +80,9 @@ void setup() {
   launcherServo.setup(&nh);
 
   sideRange.setup(&nh);
-  launcherRange.setup(&nh);
+  //launcherRange.setup(&nh);
+
+  ilsStart.setup(&nh);
 
   leftSonar.setup(&nh);
   rightSonar.setup(&nh);
@@ -83,7 +93,9 @@ void setup() {
 void loop() {
   if(millis() > nextRangeLoop) {
     sideRange.measureAndPublish(&nh);
-    launcherRange.measureAndPublish(&nh);
+    //launcherRange.measureAndPublish(&nh);
+
+    ilsStart.measureAndPublish(&nh);
 
     switch (sensorIterator) {
       case 0: leftSonar.measureAndPublish(&nh); break;

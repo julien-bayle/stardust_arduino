@@ -11,4 +11,5 @@ const byte SERVOMOTOR_FRONT = 2;        // SERVOMOTOR
 const byte SERVOMOTOR_LAUNCHER = 3;     // SERVOMOTOR
 
 const byte SHARP_SIDE = 5;      	// SHARP IR SENSOR / ADC
-const byte SHARP_LAUNCHER = 4;     	// SHARP IR SENSOR / ADC
+const byte SHARP_LAUNCHER = 3;     	// SHARP IR SENSOR / ADC
+const byte ILS_START = 4;     		// ILS / START
